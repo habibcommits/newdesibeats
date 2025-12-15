@@ -6,6 +6,7 @@ A full-featured Point of Sale (POS) system built for Desi Beats Café, a Pakista
 
 ## Recent Changes (December 2024)
 
+- Fixed ImageKit signed URL double slash issue - removed leading slash from file paths to prevent `/pos//cafe-pos/` URL pattern
 - Added fallback handling for corrupted order data in receipt printing (handles undefined/NaN values gracefully)
 - Added mongoose, bcryptjs, and imagekit to production build allowlist
 - Configured Replit deployment for autoscale with production build
