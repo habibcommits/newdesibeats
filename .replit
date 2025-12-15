@@ -21,13 +21,13 @@ args = "Start application"
 name = "Start application"
 author = "agent"
 
+[workflows.workflow.metadata]
+outputType = "webview"
+
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
-
-[workflows.workflow.metadata]
-outputType = "webview"
 
 [[ports]]
 localPort = 5000
@@ -46,5 +46,5 @@ VITE_IMAGEKIT_URL_ENDPOINT = "https://ik.imagekit.io/euowpovamk/pos/"
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["node", "dist/index.cjs"]
+run = ["npm", "run", "start"]
 build = ["npm", "run", "build"]
