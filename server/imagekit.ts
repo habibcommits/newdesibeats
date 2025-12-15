@@ -51,8 +51,10 @@ export async function deleteImage(fileId: string) {
 
 export function getSignedUrl(filePath: string, expirySeconds: number = 3600): string {
   const ik = getImageKit();
+  // Remove leading slash from path to prevent double slashes in URL
+  const cleanPath = filePath.startsWith('/') ? filePath.slice(1) : filePath;
   return ik.url({
-    path: filePath,
+    path: cleanPath,
     signed: true,
     expireSeconds: expirySeconds,
   });

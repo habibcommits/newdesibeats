@@ -1001,9 +1001,11 @@ app.post("/api/imagekit/signed-url", authMiddleware, (req, res) => {
     if (!allowedFolderPattern.test(filePath)) {
       return res.status(403).json({ message: "Access to this file path is not allowed" });
     }
+    // Remove leading slash from path to prevent double slashes in URL
+    const cleanPath = filePath.startsWith('/') ? filePath.slice(1) : filePath;
     const ik = getImageKit();
     const signedUrl = ik.url({
-      path: filePath,
+      path: cleanPath,
       signed: true,
       expireSeconds: 3600,
     });
