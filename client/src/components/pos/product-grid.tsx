@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import type { Product, Category, Settings } from "@shared/schema";
+import { SignedImage } from "@/components/signed-image";
 
 interface ProductGridProps {
   products: Product[];
@@ -76,8 +77,8 @@ export function ProductGrid({
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-2 p-2">
-        {Array.from({ length: 14 }).map((_, i) => (
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 p-2">
+        {Array.from({ length: 12 }).map((_, i) => (
           <Card
             key={i}
             className="h-28 animate-pulse bg-muted"
@@ -100,7 +101,7 @@ export function ProductGrid({
   return (
     <>
       <ScrollArea className="h-full">
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-2 p-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 p-2">
           {products.map((product) => {
             const categoryColor = getCategoryColor(product.categoryId);
             const rgb = hexToRgb(categoryColor);
@@ -129,14 +130,16 @@ export function ProductGrid({
                 )}
                 
                 <div
-                  className="h-16 flex items-center justify-center"
+                  className="h-20 flex items-center justify-center"
                   style={{ backgroundColor: lightBg }}
                 >
-                  {product.image ? (
-                    <img
-                      src={product.image}
+                  {product.imageFileId || product.image ? (
+                    <SignedImage
+                      filePath={product.imageFileId}
+                      fallbackUrl={product.image}
                       alt={product.name}
                       className="w-full h-full object-cover"
+                      data-testid={`img-product-${product._id}`}
                     />
                   ) : (
                     <UtensilsCrossed

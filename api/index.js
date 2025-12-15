@@ -770,11 +770,44 @@ app.post("/api/orders", async (req, res) => {
 
     if (!items || items.length === 0) return res.status(400).json({ message: "Order must have at least one item" });
 
+    // Validate and normalize items server-side to prevent undefined/NaN values
+    const productIds = items.map(item => item.productId).filter(Boolean);
+    const products = await Product.find({ _id: { $in: productIds } }).lean();
+    const productMap = new Map(products.map(p => [p._id.toString(), p]));
+
+    const validatedItems = items.map(item => {
+      const product = productMap.get(item.productId);
+      if (!product) {
+        throw new Error(`Product not found: ${item.productId}`);
+      }
+
+      // Use client price if valid, otherwise fallback to product price or variant price
+      let itemPrice = item.price;
+      if (typeof itemPrice !== 'number' || isNaN(itemPrice)) {
+        if (item.variant && product.variants?.length > 0) {
+          const variant = product.variants.find(v => v.name === item.variant);
+          itemPrice = variant?.price ?? product.price;
+        } else {
+          itemPrice = product.price;
+        }
+      }
+
+      return {
+        productId: new mongoose.Types.ObjectId(item.productId),
+        productName: item.productName || product.name,
+        variant: item.variant,
+        quantity: Math.max(1, parseInt(item.quantity) || 1),
+        price: itemPrice,
+        notes: item.notes,
+        isTaxable: item.isTaxable !== false,
+      };
+    });
+
     const orderNumber = await getNextOrderNumber();
 
     const order = await Order.create({
       orderNumber, type: type || "dine-in", tableId: tableId ? new mongoose.Types.ObjectId(tableId) : undefined, tableName,
-      items: items.map(item => ({ ...item, productId: new mongoose.Types.ObjectId(item.productId) })),
+      items: validatedItems,
       status: "preparing", subtotal, taxAmount, total, payments: payments || [], paidAmount: paidAmount || 0, remainingAmount: remainingAmount || total, isPaid: isPaid || false,
       cashierId: cashierId ? new mongoose.Types.ObjectId(cashierId) : undefined, cashierName,
       waiterId: waiterId ? new mongoose.Types.ObjectId(waiterId) : undefined, waiterName, customerName, customerPhone, notes,
