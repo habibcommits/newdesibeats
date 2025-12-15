@@ -1,0 +1,127 @@
+Skip to content
+habibcommits' projects
+habibcommits' projects
+
+Hobby
+
+newdesibeats
+
+
+Find…
+F
+
+Project Settings
+Go to Team Settings
+Search...
+General
+Build and Deployment
+Domains
+Environments
+Environment Variables
+Git
+Integrations
+Deployment Protection
+Functions
+Caches
+Cron Jobs
+Microfrontends
+Project Members
+Drains
+Security
+Connectivity
+Advanced
+Environment Variables
+In order to provide your Deployment with Environment Variables at Build and Runtime, you may enter them right here, for the Environment of your choice. Learn more
+
+A new Deployment is required for your changes to take effect.
+
+Create new
+
+Link Shared Environment Variables
+Sensitive
+If enabled, you and your team will not be able to read the values after creation. Learn more
+
+
+Environments
+key
+CLIENT_KEY…
+value
+Note
+Describe how you created this environment variable and how it is used
+or paste the .env contents above
+
+
+Automatically expose System Environment Variables
+Search…
+All Environments
+
+Last Updated
+
+VITE_IMAGEKIT_PUBLIC_KEY
+All Environments
+
+public_qYHxf8o7CeTJ/YeIe0m1MbUnnTI=
+Added 1d ago
+
+
+IMAGEKIT_URL_ENDPOINT
+All Environments
+
+https://ik.imagekit.io/euowpovamk/pos/
+Added 1d ago
+
+
+IMAGEKIT_PUBLIC_KEY
+All Environments
+
+public_qYHxf8o7CeTJ/YeIe0m1MbUnnTI=
+Added 1d ago
+
+
+MONGO_URI
+All Environments
+
+mongodb+srv://Truepathtemp:Truepathtemp@rightpath.kdovr8j.mongodb.net/newdesiposnenen?retryWrites=true&w=majority
+Added 1d ago
+
+
+JWT_SECRET
+All Environments
+
+f182afd385e24c55786862148c54f874
+Added 1d ago
+
+
+IMAGEKIT_PRIVATE_KEY
+All Environments
+
+private_ch8QWVR/stsW8hyoYf5VDq0qS3w=
+Added 1d ago
+
+
+VITE_IMAGEKIT_URL_ENDPOINT
+All Environments
+
+https://ik.imagekit.io/euowpovamk/pos/
+Added 1d ago
+
+Shared Environment Variables
+No Shared Environment Variables are linked to this app.
+Shared Environment Variables are set at the Team level and are inherited by this Project.
+
+Home
+Docs
+Knowledge Base
+Academy
+Help
+Contact
+Loading status…
+
+Select a display theme:
+
+system
+
+light
+
+dark
+Project Settings

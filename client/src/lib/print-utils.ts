@@ -18,6 +18,11 @@ export function formatDateTime(dateStr: string): string {
 export function printReceipt(order: Order, settings: Settings | null, copies: number = 1): void {
   const currency = settings?.currency || "Rs.";
   
+  // Helper to safely get item data with fallbacks for corrupted orders
+  const safeItemName = (item: any) => item?.productName || "Unknown Item";
+  const safeItemQuantity = (item: any) => typeof item?.quantity === "number" && !isNaN(item.quantity) ? item.quantity : 1;
+  const safeItemPrice = (item: any) => typeof item?.price === "number" && !isNaN(item.price) ? item.price : 0;
+  
   const receiptHtml = `
     <!DOCTYPE html>
     <html>
@@ -74,20 +79,20 @@ export function printReceipt(order: Order, settings: Settings | null, copies: nu
             .map(
               (item) => `
             <div class="row">
-              <span>${item.quantity}x ${item.productName}${item.variant ? ` (${item.variant})` : ""}</span>
-              <span>${formatPrice(item.price * item.quantity, currency)}</span>
+              <span>${safeItemQuantity(item)}x ${safeItemName(item)}${item.variant ? ` (${item.variant})` : ""}</span>
+              <span>${formatPrice(safeItemPrice(item) * safeItemQuantity(item), currency)}</span>
             </div>
             ${item.notes ? `<div class="item-note">Note: ${item.notes}</div>` : ""}
           `
             )
             .join("")}
           <div class="divider"></div>
-          <div class="row"><span>Subtotal:</span><span>${formatPrice(order.subtotal, currency)}</span></div>
-          <div class="row"><span>Tax (${settings?.taxPercentage || 16}%):</span><span>${formatPrice(order.taxAmount, currency)}</span></div>
+          <div class="row"><span>Subtotal:</span><span>${formatPrice(order.subtotal || 0, currency)}</span></div>
+          <div class="row"><span>Tax (${settings?.taxPercentage || 16}%):</span><span>${formatPrice(order.taxAmount || 0, currency)}</span></div>
           <div class="divider"></div>
-          <div class="row total-row"><span>TOTAL:</span><span>${formatPrice(order.total, currency)}</span></div>
+          <div class="row total-row"><span>TOTAL:</span><span>${formatPrice(order.total || 0, currency)}</span></div>
           ${
-            order.payments.length > 0
+            order.payments && order.payments.length > 0
               ? `
             <div class="divider"></div>
             <div style="font-weight: bold; margin: 8px 0;">Payment:</div>
@@ -95,8 +100,8 @@ export function printReceipt(order: Order, settings: Settings | null, copies: nu
               .map(
                 (p) => `
               <div class="row">
-                <span style="text-transform: uppercase;">${p.method.replace("_", " ")}</span>
-                <span>${formatPrice(p.amount, currency)}${p.tip > 0 ? ` (+${formatPrice(p.tip, currency)} tip)` : ""}</span>
+                <span style="text-transform: uppercase;">${(p.method || "unknown").replace("_", " ")}</span>
+                <span>${formatPrice(p.amount || 0, currency)}${p.tip > 0 ? ` (+${formatPrice(p.tip, currency)} tip)` : ""}</span>
               </div>
             `
               )

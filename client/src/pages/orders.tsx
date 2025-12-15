@@ -148,6 +148,11 @@ export default function OrdersPage() {
     }
   };
 
+  // Helper to safely get item data with fallbacks for corrupted orders
+  const safeItemName = (item: any) => item?.productName || "Unknown Item";
+  const safeItemQuantity = (item: any) => typeof item?.quantity === "number" && !isNaN(item.quantity) ? item.quantity : 1;
+  const safeItemPrice = (item: any) => typeof item?.price === "number" && !isNaN(item.price) ? item.price : 0;
+
   const handlePrint = (order: Order) => {
     // Create a hidden iframe for cross-browser print compatibility
     const printFrame = document.createElement("iframe");
@@ -217,20 +222,20 @@ export default function OrdersPage() {
           .map(
             (item) => `
           <div class="row">
-            <span>${item.quantity}x ${item.productName}${item.variant ? ` (${item.variant})` : ""}</span>
-            <span>${formatPrice(item.price * item.quantity)}</span>
+            <span>${safeItemQuantity(item)}x ${safeItemName(item)}${item.variant ? ` (${item.variant})` : ""}</span>
+            <span>${formatPrice(safeItemPrice(item) * safeItemQuantity(item))}</span>
           </div>
           ${item.notes ? `<div class="item-note">Note: ${item.notes}</div>` : ""}
         `
           )
           .join("")}
         <div class="divider"></div>
-        <div class="row"><span>Subtotal:</span><span>${formatPrice(order.subtotal)}</span></div>
-        <div class="row"><span>Tax (${settings?.taxPercentage || 16}%):</span><span>${formatPrice(order.taxAmount)}</span></div>
+        <div class="row"><span>Subtotal:</span><span>${formatPrice(order.subtotal || 0)}</span></div>
+        <div class="row"><span>Tax (${settings?.taxPercentage || 16}%):</span><span>${formatPrice(order.taxAmount || 0)}</span></div>
         <div class="divider"></div>
-        <div class="row total-row"><span>TOTAL:</span><span>${formatPrice(order.total)}</span></div>
+        <div class="row total-row"><span>TOTAL:</span><span>${formatPrice(order.total || 0)}</span></div>
         ${
-          order.payments.length > 0
+          order.payments && order.payments.length > 0
             ? `
           <div class="divider"></div>
           <div style="font-weight: bold; margin: 8px 0;">Payment:</div>
@@ -238,8 +243,8 @@ export default function OrdersPage() {
             .map(
               (p) => `
             <div class="row">
-              <span style="text-transform: uppercase;">${p.method.replace("_", " ")}</span>
-              <span>${formatPrice(p.amount)}${p.tip > 0 ? ` (+${formatPrice(p.tip)} tip)` : ""}</span>
+              <span style="text-transform: uppercase;">${(p.method || "unknown").replace("_", " ")}</span>
+              <span>${formatPrice(p.amount || 0)}${p.tip > 0 ? ` (+${formatPrice(p.tip)} tip)` : ""}</span>
             </div>
           `
             )

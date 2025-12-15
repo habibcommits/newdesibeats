@@ -32,3 +32,19 @@ outputType = "webview"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[userenv]
+
+[userenv.shared]
+MONGO_URI = "mongodb+srv://Truepathtemp:Truepathtemp@rightpath.kdovr8j.mongodb.net/newdesiposnenen?retryWrites=true&w=majority"
+JWT_SECRET = "f182afd385e24c55786862148c54f874"
+IMAGEKIT_PRIVATE_KEY = "private_ch8QWVR/stsW8hyoYf5VDq0qS3w="
+IMAGEKIT_PUBLIC_KEY = "public_qYHxf8o7CeTJ/YeIe0m1MbUnnTI="
+IMAGEKIT_URL_ENDPOINT = "https://ik.imagekit.io/euowpovamk/pos/"
+VITE_IMAGEKIT_PUBLIC_KEY = "public_qYHxf8o7CeTJ/YeIe0m1MbUnnTI="
+VITE_IMAGEKIT_URL_ENDPOINT = "https://ik.imagekit.io/euowpovamk/pos/"
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["node", "dist/index.cjs"]
+build = ["npm", "run", "build"]

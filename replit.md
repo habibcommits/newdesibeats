@@ -4,6 +4,13 @@
 
 A full-featured Point of Sale (POS) system built for Desi Beats Café, a Pakistani restaurant serving 800+ food and beverage items. The system handles dine-in and takeaway orders, table management, kitchen display, order tracking, payment processing, and analytics. Built with a modern MERN-inspired stack (MongoDB, Express, React, Node.js) designed for fast-paced restaurant operations with touch-optimized interfaces.
 
+## Recent Changes (December 2024)
+
+- Added fallback handling for corrupted order data in receipt printing (handles undefined/NaN values gracefully)
+- Added mongoose, bcryptjs, and imagekit to production build allowlist
+- Configured Replit deployment for autoscale with production build
+- Environment variables set up: MONGO_URI, JWT_SECRET, IMAGEKIT credentials
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
