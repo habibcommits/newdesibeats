@@ -1,0 +1,275 @@
+Skip to content
+habibcommits' projects
+habibcommits' projects
+
+Hobby
+
+newdesibeats
+
+
+Find…
+F
+
+Filters
+
+Timeline
+
+Combobox Menu
+Last 30 minutes
+
+Contains Console Level
+
+​
+Warning
+0
+
+​
+Error
+0
+
+​
+Fatal
+0
+
+
+Resource
+
+
+
+
+
+Environment
+
+
+
+
+Route
+
+
+
+Request Path
+
+
+
+Status Code
+
+
+
+Request Type
+
+
+
+
+
+
+
+
+Host
+
+
+
+Request Method
+
+
+
+Cache
+
+
+
+Branch
+
+
+
+Deployment ID
+
+
+Search Logs
+35 total logs found...
+00:52:00
+01:01:00
+01:09:30
+01:22:00
+Time
+Status
+Host
+Request
+Messages
+Dec 17 01:20:44.14
+GET
+304
+newdesibeats.vercel.app
+/api/tables
+Dec 17 01:20:43.20
+POST
+201
+newdesibeats.vercel.app
+/api/orders
+Dec 17 01:20:33.40
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:20:33.39
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:20:33.39
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:20:33.39
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:20:33.38
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:20:27.72
+GET
+304
+newdesibeats.vercel.app
+/api/tables
+Dec 17 01:20:27.72
+GET
+304
+newdesibeats.vercel.app
+/api/categories
+Dec 17 01:20:27.72
+GET
+304
+newdesibeats.vercel.app
+/api/products
+Dec 17 01:20:27.68
+GET
+304
+newdesibeats.vercel.app
+/api/settings
+Dec 17 01:17:38.93
+GET
+---
+newdesibeats-8soc5i9h3-habibcommits-projects.vercel.app
+/api/settings
+Dec 17 01:17:38.88
+GET
+200
+newdesibeats-8soc5i9h3-habibcommits-projects.vercel.app
+/api/settings
+Dec 17 01:17:15.76
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:17:15.76
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:17:15.76
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:17:15.76
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:17:15.76
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:17:11.32
+GET
+304
+newdesibeats.vercel.app
+/api/products
+Dec 17 01:17:11.32
+GET
+304
+newdesibeats.vercel.app
+/api/categories
+Dec 17 01:17:11.32
+GET
+304
+newdesibeats.vercel.app
+/api/tables
+Dec 17 01:17:11.26
+GET
+304
+newdesibeats.vercel.app
+/api/settings
+Dec 17 01:09:02.00
+GET
+304
+newdesibeats.vercel.app
+/api/tables
+Dec 17 01:09:01.06
+POST
+201
+newdesibeats.vercel.app
+/api/orders
+Dec 17 01:08:53.03
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:08:53.02
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:08:53.02
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:08:53.02
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:08:53.02
+POST
+200
+newdesibeats.vercel.app
+/api/imagekit/signed-url
+Dec 17 01:08:52.30
+GET
+304
+newdesibeats.vercel.app
+/api/categories
+Dec 17 01:08:52.30
+GET
+304
+newdesibeats.vercel.app
+/api/settings
+Dec 17 01:08:52.30
+GET
+304
+newdesibeats.vercel.app
+/api/tables
+Dec 17 01:08:52.30
+GET
+304
+newdesibeats.vercel.app
+/api/products
+Dec 17 01:06:00.10
+GET
+304
+newdesibeats.vercel.app
+/api/reports
+Dec 17 01:06:00.10
+GET
+304
+newdesibeats.vercel.app
+/api/settings
+No more logs to show within selected timeline
+
+newdesibeats – Logs – Vercel
+01:09:30

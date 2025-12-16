@@ -517,6 +517,9 @@ export async function registerRoutes(
       const products = await Product.find({ _id: { $in: productIds } }).lean();
       const productMap = new Map(products.map(p => [p._id.toString(), p]));
 
+      console.log("[Order Create] Received items:", JSON.stringify(items, null, 2));
+      console.log("[Order Create] Found products:", products.map(p => ({ id: p._id.toString(), name: p.name, price: p.price })));
+
       const validatedItems = items.map((item: any) => {
         const product = productMap.get(item.productId);
         if (!product) {
@@ -534,15 +537,23 @@ export async function registerRoutes(
           }
         }
 
-        return {
+        // Ensure productName is always a non-empty string
+        const productName = item.productName && typeof item.productName === 'string' && item.productName.trim() !== '' 
+          ? item.productName 
+          : (product.name || 'Unknown Product');
+
+        const validatedItem = {
           productId: new mongoose.Types.ObjectId(item.productId),
-          productName: item.productName || product.name,
-          variant: item.variant,
+          productName: productName,
+          variant: item.variant || undefined,
           quantity: Math.max(1, parseInt(item.quantity) || 1),
-          price: itemPrice,
-          notes: item.notes,
+          price: typeof itemPrice === 'number' && !isNaN(itemPrice) ? itemPrice : product.price,
+          notes: item.notes || undefined,
           isTaxable: item.isTaxable !== false,
         };
+
+        console.log("[Order Create] Validated item:", JSON.stringify(validatedItem, null, 2));
+        return validatedItem;
       });
 
       const orderNumber = await getNextOrderNumber();
@@ -579,21 +590,25 @@ export async function registerRoutes(
       }
 
       const orderObj = order.toObject();
+      const responseItems = orderObj.items.map((item: any) => ({
+        productId: item.productId.toString(),
+        productName: item.productName || "Item",
+        variant: item.variant,
+        quantity: item.quantity || 1,
+        price: item.price || 0,
+        notes: item.notes,
+        isTaxable: item.isTaxable !== false,
+      }));
+      
+      console.log("[Order Create] Response items:", JSON.stringify(responseItems, null, 2));
+      
       res.status(201).json({
         ...orderObj,
         _id: order._id.toString(),
         tableId: order.tableId?.toString(),
         cashierId: order.cashierId?.toString(),
         waiterId: order.waiterId?.toString(),
-        items: orderObj.items.map((item: any) => ({
-          productId: item.productId.toString(),
-          productName: item.productName || "Item",
-          variant: item.variant,
-          quantity: item.quantity || 1,
-          price: item.price || 0,
-          notes: item.notes,
-          isTaxable: item.isTaxable !== false,
-        })),
+        items: responseItems,
         createdAt: order.createdAt.toISOString(),
         updatedAt: order.updatedAt.toISOString(),
       });
