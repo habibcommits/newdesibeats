@@ -139,7 +139,7 @@ export function PaymentModal({
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <div className="space-y-6 max-h-[calc(100vh-300px)] overflow-y-auto pr-4">
           {/* Total Display */}
           <div className="text-center p-4 bg-muted rounded-lg">
             <p className="text-sm text-muted-foreground mb-1">Total Amount</p>
