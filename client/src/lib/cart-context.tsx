@@ -3,7 +3,6 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/lib/auth-context";
-import { printReceipt } from "@/lib/print-utils";
 import type { CartItem, Product, Table, Payment, Order, Settings } from "@shared/schema";
 
 type OrderType = "takeaway" | "dine-in" | "delivery";
@@ -62,13 +61,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
         title: "Order Created",
         description: "The order has been sent to the kitchen",
       });
-      
-      // Print 2 copies of receipt on payment confirmation
-      if (order.isPaid) {
-        setTimeout(() => {
-          printReceipt(order, settings || null, 2);
-        }, 500);
-      }
     },
     onError: (error: any) => {
       toast({
